@@ -21,6 +21,7 @@ import { IdentityEventSender } from './plugins/identity';
 
 export class AmplitudeBrowser extends AmplitudeCore<BrowserConfig> {
   async init(apiKey: string, userId?: string, options?: BrowserOptions & AdditionalBrowserOptions) {
+    console.log('Top of init', window.document.cookie);
     // Step 1: Read cookies stored by old SDK
     // const oldCookies = await parseOldCookies(apiKey, options);
 

@@ -19,9 +19,13 @@ export class SessionManager implements ISessionManager {
    * ```
    */
   async load() {
+    console.log('Loading Session Manager');
+    console.log('Storage Key is', this.storageKey);
+    console.log('Storage is', JSON.stringify(this.storage));
     this.cache = (await this.storage.get(this.storageKey)) ?? {
       optOut: false,
     };
+    console.log('Session Manager cache was', JSON.stringify(this.cache));
     return this;
   }
 

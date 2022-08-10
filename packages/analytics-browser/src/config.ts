@@ -140,10 +140,15 @@ export const useBrowserConfig = async (
   options?: BrowserOptions,
 ): Promise<IBrowserConfig> => {
   const defaultConfig = getDefaultConfig();
-  const domain = options?.domain ?? (await getTopLevelDomain());
+  console.log('After default config', window.document.cookie);
+  const domain = '.amplitude.com'; // options?.domain ?? (await getTopLevelDomain());
+  console.log('After domain', window.document.cookie);
   const cookieStorage = await createCookieStorage({ ...options, domain });
+  console.log('After Create cookie storage', window.document.cookie);
   const cookieName = getCookieName(apiKey);
+  console.log('Calling get on expected cookie storage');
   const cookies = await cookieStorage.get(cookieName);
+  console.log('Cookie name ', cookieName, 'cookies are', cookies);
   const queryParams = getQueryParams();
   console.log('loading cookies for the first time');
   const sessionManager = await new SessionManager(cookieStorage, apiKey).load();
@@ -166,11 +171,16 @@ export const createCookieStorage = async (
   overrides?: BrowserOptions,
   baseConfig = getDefaultConfig(),
 ): Promise<Storage<UserSession>> => {
+  console.log('Creating cookie storage');
   const options = { ...baseConfig, ...overrides };
+  console.log('options are', JSON.stringify(options));
   const cookieStorage = overrides?.cookieStorage;
+  console.log('Default cookie storage is', JSON.stringify(cookieStorage));
   if (!cookieStorage || !(await cookieStorage.isEnabled())) {
+    console.log('Creating flexible storage');
     return createFlexibleStorage<UserSession>(options);
   }
+  console.log('Returning default cookie storage instead of created flexible storage');
   return cookieStorage;
 };
 
@@ -181,6 +191,8 @@ export const createFlexibleStorage = async <T>(options: BrowserOptions): Promise
     sameSite: options.cookieSameSite,
     secure: options.cookieSecure,
   });
+  console.log('createFlexibleStorage - storage default is', JSON.stringify(storage));
+  console.log('Browser Options are', JSON.stringify(options));
   if (options.disableCookies || !(await storage.isEnabled())) {
     console.log('using LocalStorage');
     storage = new LocalStorage();
@@ -190,6 +202,7 @@ export const createFlexibleStorage = async <T>(options: BrowserOptions): Promise
     }
   }
   console.log('using default storage; perhaps CookieStorage');
+  console.log(await storage.get('Test_get'));
   return storage;
 };
 

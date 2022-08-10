@@ -14,7 +14,7 @@ import {
 import { convertProxyObjectToRealObject, isInstanceProxy } from './utils/snippet-helper';
 import { Context } from './plugins/context';
 import { useBrowserConfig, createTransport, createDeviceId, createFlexibleStorage } from './config';
-import { parseOldCookies } from './cookie-migration';
+// import { parseOldCookies } from './cookie-migration';
 import { CampaignTracker } from './attribution/campaign-tracker';
 import { getAnalyticsConnector } from './utils/analytics-connector';
 import { IdentityEventSender } from './plugins/identity';
@@ -22,15 +22,14 @@ import { IdentityEventSender } from './plugins/identity';
 export class AmplitudeBrowser extends AmplitudeCore<BrowserConfig> {
   async init(apiKey: string, userId?: string, options?: BrowserOptions & AdditionalBrowserOptions) {
     // Step 1: Read cookies stored by old SDK
-    const oldCookies = await parseOldCookies(apiKey, options);
+    // const oldCookies = await parseOldCookies(apiKey, options);
 
     // Step 2: Create browser config
-    const browserOptions = await useBrowserConfig(apiKey, userId || oldCookies.userId, {
+    const browserOptions = await useBrowserConfig(apiKey, userId, {
       ...options,
-      deviceId: oldCookies.deviceId ?? options?.deviceId,
-      sessionId: oldCookies.sessionId ?? options?.sessionId,
-      optOut: options?.optOut ?? oldCookies.optOut,
-      lastEventTime: oldCookies.lastEventTime,
+      deviceId: options?.deviceId,
+      sessionId: options?.sessionId,
+      optOut: options?.optOut,
     });
     await super._init(browserOptions);
 
@@ -40,10 +39,13 @@ export class AmplitudeBrowser extends AmplitudeCore<BrowserConfig> {
       !this.config.sessionId ||
       (this.config.lastEventTime && Date.now() - this.config.lastEventTime > this.config.sessionTimeout)
     ) {
+      console.log('sessionId', this.config.sessionId);
+      console.log('lastEventTime', this.config.lastEventTime);
       // Either
       // 1) No previous session; or
       // 2) Previous session expired
       this.config.sessionId = Date.now();
+      console.log('setting is new session to true');
       isNewSession = true;
     }
 

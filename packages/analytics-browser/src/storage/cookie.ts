@@ -10,6 +10,7 @@ export class CookieStorage<T> implements Storage<T> {
   async isEnabled(): Promise<boolean> {
     /* istanbul ignore if */
     if (typeof window === 'undefined') {
+      console.log('cookies are not enabled');
       return false;
     }
 
@@ -19,6 +20,7 @@ export class CookieStorage<T> implements Storage<T> {
     try {
       await testStrorage.set(testKey, random);
       const value = await testStrorage.get(testKey);
+      console.log('cookies are enabled');
       return value === random;
     } catch {
       /* istanbul ignore next */
@@ -53,6 +55,7 @@ export class CookieStorage<T> implements Storage<T> {
     if (!match) {
       return undefined;
     }
+    console.log('reading cookie of key:', key, match.substring(key.length + 1));
     return match.substring(key.length + 1);
   }
 
@@ -80,6 +83,7 @@ export class CookieStorage<T> implements Storage<T> {
       if (this.options.sameSite) {
         str += `; SameSite=${this.options.sameSite}`;
       }
+      console.log('setting cookie:', key, JSON.stringify(value));
       window.document.cookie = str;
     } catch {
       //

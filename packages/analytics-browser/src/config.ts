@@ -145,6 +145,7 @@ export const useBrowserConfig = async (
   const cookieName = getCookieName(apiKey);
   const cookies = await cookieStorage.get(cookieName);
   const queryParams = getQueryParams();
+  console.log('loading cookies for the first time');
   const sessionManager = await new SessionManager(cookieStorage, apiKey).load();
 
   return new BrowserConfig(apiKey, userId ?? cookies?.userId, {
@@ -181,11 +182,14 @@ export const createFlexibleStorage = async <T>(options: BrowserOptions): Promise
     secure: options.cookieSecure,
   });
   if (options.disableCookies || !(await storage.isEnabled())) {
+    console.log('using LocalStorage');
     storage = new LocalStorage();
     if (!(await storage.isEnabled())) {
+      console.log('using MemoryStorage');
       storage = new MemoryStorage();
     }
   }
+  console.log('using default storage; perhaps CookieStorage');
   return storage;
 };
 

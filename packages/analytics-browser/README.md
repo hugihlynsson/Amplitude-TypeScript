@@ -7,6 +7,8 @@
 
 # @amplitude/analytics-browser
 
+![](https://badgen.net/npm/v/@amplitude/analytics-browser) ![](https://badgen.net/npm/license/@amplitude/analytics-browser) ![](https://badgen.net/bundlephobia/minzip/@amplitude/analytics-browser) ![](https://badgen.net/bundlephobia/tree-shaking/@amplitude/analytics-browser)
+
 Official Amplitude SDK for Web
 
 ## Installation

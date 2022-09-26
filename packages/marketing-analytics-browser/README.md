@@ -7,6 +7,8 @@
 
 # @amplitude/marketing-analytics-browser
 
+![](https://badgen.net/npm/v/@amplitude/marketing-analytics-browser) ![](https://badgen.net/npm/license/@amplitude/marketing-analytics-browser) ![](https://badgen.net/bundlephobia/minzip/@amplitude/marketing-analytics-browser) ![](https://badgen.net/bundlephobia/tree-shaking/@amplitude/marketing-analytics-browser)
+
 Official Amplitude SDK for Web and Marketing Analytics
 
 ## Installation

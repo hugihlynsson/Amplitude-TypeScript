@@ -1,0 +1,12 @@
+<p align="center">
+  <a href="https://amplitude.com" target="_blank" align="center">
+    <img src="https://static.amplitude.com/lightning/46c85bfd91905de8047f1ee65c7c93d6fa9ee6ea/static/media/amplitude-logo-with-text.4fb9e463.svg" width="280">
+  </a>
+  <br />
+</p>
+
+# @amplitude/plugin-page-view-tracking-browser
+
+![](https://badgen.net/npm/v/@amplitude/plugin-page-view-tracking-browser) ![](https://badgen.net/npm/license/@amplitude/plugin-page-view-tracking-browser) ![](https://badgen.net/bundlephobia/minzip/@amplitude/plugin-page-view-tracking-browser) ![](https://badgen.net/bundlephobia/tree-shaking/@amplitude/plugin-web-attribution-browser)
+
+Official Amplitude SDK Plugin for Page View Tracking

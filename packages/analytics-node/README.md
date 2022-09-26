@@ -7,6 +7,8 @@
 
 # @amplitude/analytics-node
 
+![](https://badgen.net/npm/v/@amplitude/analytics-node) ![](https://badgen.net/npm/license/@amplitude/analytics-node) ![](https://badgen.net/bundlephobia/tree-shaking/@amplitude/plugin-web-attribution-browser)
+
 Official Amplitude SDK for Node.js (Beta)
 
 ## Installation
